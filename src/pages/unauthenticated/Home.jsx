@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import UnauthenticatedLayout from "../../layouts/UnauthenticatedLayout";
+import UnauthenticatedLayout from "../../layouts/UnAuthenticatedLayout";
 import Hero from "../../components/Hero";
 
 const Home = () => {
