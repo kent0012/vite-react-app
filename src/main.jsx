@@ -14,7 +14,7 @@ import Cart from "./pages/Cart";
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
-  <BrowserRouter basename="/ecommerce-app">
+  <BrowserRouter basename="/vite-react-app">
     <Provider store={store}>
       <Routes>
         <Route path="/" element={<Home />} />
