@@ -63,14 +63,28 @@ const Navigation = () => {
               <span className="text-sky-500 font-semibold">Tech</span>
             </h2>
           </NavLink>
-          <button
-            onClick={showMobileMenu}
-            className="relative w-10 h-10 block items-center justify-center cursor-pointer md:hidden "
-          >
-            <span
-              className={`block w-8 h-1 ${
-                isMenuOpen ? "bg-transparent" : "bg-white"
-              } rounded-md relative transition-transform duration-300 ease-in-out
+          <div className="flex items-center space-x-4 md:hidden ">
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                `text-2xl hover:text-sky-500 transition-colors duration-200 capitalize relative ${
+                  isActive ? "text-sky-500 " : ""
+                }`
+              }
+            >
+              <i className="fa-solid fa-cart-shopping"></i>
+              <p className="absolute -top-1 -right-2 bg-red-700 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                {cartCount}
+              </p>
+            </NavLink>
+            <button
+              onClick={showMobileMenu}
+              className="relative w-10 h-10 block items-center justify-center cursor-pointer "
+            >
+              <span
+                className={`block w-8 h-1 ${
+                  isMenuOpen ? "bg-transparent" : "bg-white"
+                } rounded-md relative transition-transform duration-300 ease-in-out
             before:content-[''] before:block before:absolute before:w-8 before:h-1 before:bg-white before:rounded-md before:transition-transform before:duration-300 before:ease-in-out
             after:content-[''] after:block after:absolute after:w-8 after:h-1 after:bg-white after:rounded-md after:transition-transform after:duration-300 after:ease-in-out
             ${
@@ -78,8 +92,9 @@ const Navigation = () => {
                 ? "bg-transparent before:rotate-45 before:translate-y-0 after:-rotate-45 after:translate-y-0"
                 : "before:-translate-y-2 after:translate-y-2"
             }`}
-            ></span>
-          </button>
+              ></span>
+            </button>
+          </div>
         </div>
         <ul
           className={`${
