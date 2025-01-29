@@ -22,6 +22,7 @@ const ProductCard = ({ data }) => {
                     className="w-full h-full object-cover"
                     src={product.product_image}
                     alt={product.product_name}
+                    loading="lazy"
                   />
                 </NavLink>
               </figure>
@@ -39,9 +40,12 @@ const ProductCard = ({ data }) => {
               </div>
               <div className="flex items-center w-full justify-between mt-3">
                 <ButtonCart
+                  quantityCount={1}
+                  btnName="Add to Cart"
                   isDisabled={product.product_stocks <= 5 ? "disabled" : ""}
-                  btnName="Add to cart"
+                  productId={product.id}
                 />
+
                 <NavLink
                   className="text-xm text-gray-500 hover:underline duration-500"
                   to={`/product/${product.id}`}

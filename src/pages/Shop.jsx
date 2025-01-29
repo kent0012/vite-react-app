@@ -18,7 +18,7 @@ const Shop = () => {
   const products = useSelector(selectProducts);
 
   const handleInputValueChange = (category) => {
-    console.log("Selected Category ID:", category.id);
+    // console.log("Selected Category ID:", category.id);
     setSelectedCategories((prevSelectedCategories) => {
       if (prevSelectedCategories.includes(category.id)) {
         // If the category is already selected, remove it

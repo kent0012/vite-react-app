@@ -3,9 +3,23 @@ import { mainMenu } from "../constants/constants";
 import { useEffect, useState } from "react";
 import ButtonFilled from "./ButtonFilled";
 
+import { selectCart } from "../feautures/cart/CartSlice";
+import { useSelector } from "react-redux";
+
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [addBackground, setAddBackground] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  const cart = useSelector(selectCart);
+
+  useEffect(() => {
+    let count = 0;
+    cart.forEach((item) => {
+      count += item.quantity;
+    });
+    setCartCount(count);
+  }, [cart]);
 
   useEffect(() => {
     const changeBackground = () => {
@@ -89,10 +103,10 @@ const Navigation = () => {
           ))}
           <li className="flex items-center space-x-2 text-2xl hover:text-sky-500 transition-colors duration-200 capitalize">
             <span className="md:hidden block">Cart</span>
-            <NavLink to="cart" className="relative">
+            <NavLink to="/cart" className="relative">
               <i className="fa-solid fa-cart-shopping"></i>
               <p className="absolute -top-1 -right-2 bg-red-700 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
-                25
+                {cartCount}
               </p>
             </NavLink>
           </li>

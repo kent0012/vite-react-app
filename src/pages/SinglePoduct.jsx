@@ -6,9 +6,14 @@ import { selectProducts } from "../feautures/products/ProductSlice";
 import { Helmet } from "react-helmet";
 import ProductRatings from "../components/ProductRatings";
 import ButtonCart from "../components/ButtonCart";
+import { useState } from "react";
+
+import ProductCounter from "../components/ProductCounter";
 
 const SingleProduct = () => {
-  const { id } = useParams(); // Corrected destructuring
+  const [productQuantity, setProductQuantity] = useState(1);
+
+  const { id } = useParams();
   const products = useSelector(selectProducts);
 
   const product = products.find((product) => product.id === Number(id));
@@ -25,6 +30,10 @@ const SingleProduct = () => {
       </UnAuthenticatedLayout>
     );
   }
+
+  const handleQuantityChange = (newQuantity) => {
+    setProductQuantity(newQuantity);
+  };
 
   return (
     <UnAuthenticatedLayout>
@@ -52,7 +61,7 @@ const SingleProduct = () => {
           <p className="text-gray-600 mt-2">{product?.product_description}</p>
           <ProductRatings productRatings={product?.product_rating} />
 
-          <div className="mt-4">
+          <div className="my-4">
             <p className="text-lg font-semibold text-gray-800">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
@@ -70,18 +79,18 @@ const SingleProduct = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-4 mt-5">
-            <button className="text-gray-500 bg-gray-100 px-3 rounded">
-              -
-            </button>
-            <p>1</p>
-            <button className="text-gray-500 bg-gray-100 px-3 rounded">
-              +
-            </button>
-          </div>
+          <ProductCounter
+            initialCount={productQuantity}
+            onChange={handleQuantityChange}
+          />
 
           <div className="mt-5 w-full flex items-center justify-between">
-            <ButtonCart btnName="Add To Cart" />
+            <ButtonCart
+              quantityCount={productQuantity}
+              btnName="Add to Cart"
+              isDisabled={product.product_stocks <= 5 ? "disabled" : ""}
+              productId={product.id}
+            />
             <NavLink
               className="text-xm text-gray-500 hover:underline duration-500"
               to="/shop"
