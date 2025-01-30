@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build
@@ -16,12 +19,17 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
       - name: Build project
         run: npm run build
+
+      - name: Debug artifact upload
+        run: ls -l ./dist
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
@@ -42,8 +50,11 @@ jobs:
           name: production-files
           path: ./dist
 
+      - name: Debug artifact download
+        run: ls -l ./dist
+
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
