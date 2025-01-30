@@ -6,7 +6,6 @@ import {
 } from "../feautures/cart/CartSlice";
 import { selectProducts } from "../feautures/products/ProductSlice";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 
 const CartProductList = () => {
   const dispatch = useDispatch();
@@ -39,8 +38,7 @@ const CartProductList = () => {
         <p className="text-center text-lg text-gray-500">No Item Found</p>
       ) : (
         cartItems.map((product) => (
-          <NavLink
-            to={`/product/${product.id}`}
+          <div
             key={product.id}
             className="flex items-center justify-between p-3 shadow rounded-lg bg-white w-full hover:shadow-md duration-500"
           >
@@ -111,7 +109,7 @@ const CartProductList = () => {
                 <i className="fa-solid fa-trash"></i>
               </button>
             </div>
-          </NavLink>
+          </div>
         ))
       )}
     </>
