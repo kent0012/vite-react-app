@@ -48,8 +48,26 @@ const Cart = () => {
       <PageBanner bannerTitle="Cart" />
       <section className="max-w-7xl mx-auto py-8 grid grid-cols-1 md:grid-cols-[70%_1fr] gap-4 p-4 ">
         <div className="mb-5 shadow p-4 rounded-lg bg-white">
-          <div className="mb-5 rounded-lg bg-white">
+          <div className="mb-5 rounded-lg bg-white flex items-center justify-between">
             <h2 className="text-2xl md:text-3xl font-[Poppins]">Cart List</h2>
+            {/* <button
+              onClick={() => dispatch(clearCart())}
+              className={`bg-red-800 border border-solid border-red-8 duration-500 font-[Poppins] py-2 px-4 text-white rounded hover:bg-red-700  ${
+                cart.length === 0
+                  ? "opacity-50 cursor-not-allowed"
+                  : "cursor-pointer"
+              }`}
+            >
+              Clear Cart
+            </button> */}
+            <ButtonFilled
+              isDisabled={cart.length === 0}
+              btnName="Clear Cart"
+              onClick={() => dispatch(clearCart())}
+              bgColor="bg-red-800"
+              hoverBgColor="hover:bg-red-700"
+              borderColor="border-red-800"
+            />
           </div>
           <div className="flex items-center justify-between flex-col gap-5 w-full rounded-lg bg-white">
             <CartProductList />

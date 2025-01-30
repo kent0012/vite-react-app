@@ -85,10 +85,21 @@ const Shop = () => {
             </h2>
           </div>
 
-          <PriceRange
+          {/* <PriceRange
             priceRange={priceRange}
             maxPrice={
               Math.max(...products.map((product) => product.product_price)) || 0
+            }
+            onPriceChange={(newPriceRange) => setPriceRange(newPriceRange)}
+          /> */}
+
+          <PriceRange
+            priceRange={priceRange}
+            maxPrice={
+              Math.ceil(
+                Math.max(...products.map((product) => product.product_price)) /
+                  100
+              ) * 100 || 0
             }
             onPriceChange={(newPriceRange) => setPriceRange(newPriceRange)}
           />

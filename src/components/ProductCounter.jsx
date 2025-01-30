@@ -13,7 +13,7 @@ const ProductCounter = ({ onChange, initialCount = 1 }) => {
     <div className="flex items-center justify-start gap-1 w-full">
       <button
         onClick={() => handleQuantityChange(quantityCount - 1)}
-        className="text-gray-500 bg-gray-100 px-3 rounded"
+        className="text-gray-500 bg-gray-100 px-3 rounded cursor-pointer"
       >
         -
       </button>
@@ -26,7 +26,7 @@ const ProductCounter = ({ onChange, initialCount = 1 }) => {
       />
       <button
         onClick={() => handleQuantityChange(quantityCount + 1)}
-        className="text-gray-500 bg-gray-100 px-3 rounded"
+        className="text-gray-500 bg-gray-100 px-3 rounded cursor-pointer"
       >
         +
       </button>

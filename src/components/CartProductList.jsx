@@ -6,6 +6,7 @@ import {
 } from "../feautures/cart/CartSlice";
 import { selectProducts } from "../feautures/products/ProductSlice";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const CartProductList = () => {
   const dispatch = useDispatch();
@@ -38,9 +39,10 @@ const CartProductList = () => {
         <p className="text-center text-lg text-gray-500">No Item Found</p>
       ) : (
         cartItems.map((product) => (
-          <div
+          <NavLink
+            to={`/product/${product.id}`}
             key={product.id}
-            className="flex items-center justify-between p-2 shadow rounded-lg bg-white w-full hover:shadow-md duration-500"
+            className="flex items-center justify-between p-3 shadow rounded-lg bg-white w-full hover:shadow-md duration-500"
           >
             <div className="flex items-center space-x-4">
               <figure className="w-20 h-20 md:w-24 md:h-24 shadow ratio-1:1">
@@ -84,7 +86,7 @@ const CartProductList = () => {
                       (quantities[product.id] || 1) - 1
                     )
                   }
-                  className="text-gray-500 bg-gray-100 px-3 rounded"
+                  className="text-gray-500 bg-gray-100 px-3 rounded cursor-pointer"
                 >
                   -
                 </button>
@@ -96,7 +98,7 @@ const CartProductList = () => {
                       (quantities[product.id] || 1) + 1
                     )
                   }
-                  className="text-gray-500 bg-gray-100 px-3 rounded"
+                  className="text-gray-500 bg-gray-100 px-3 rounded cursor-pointer"
                 >
                   +
                 </button>
@@ -109,7 +111,7 @@ const CartProductList = () => {
                 <i className="fa-solid fa-trash"></i>
               </button>
             </div>
-          </div>
+          </NavLink>
         ))
       )}
     </>
