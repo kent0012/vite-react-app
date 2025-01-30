@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ProductCounter = ({ onChange, initialCount = 1 }) => {
+const ProductCounter = ({ onChange, initialCount = 1, productStocks }) => {
   const [quantityCount, setQuantityCount] = useState(initialCount);
 
   const handleQuantityChange = (newCount) => {
@@ -25,6 +25,7 @@ const ProductCounter = ({ onChange, initialCount = 1 }) => {
         onChange={(e) => handleQuantityChange(Number(e.target.value) || 1)}
       />
       <button
+        disabled={productStocks && quantityCount >= productStocks}
         onClick={() => handleQuantityChange(quantityCount + 1)}
         className="text-gray-500 bg-gray-100 px-3 rounded cursor-pointer"
       >
