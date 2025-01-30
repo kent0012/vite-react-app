@@ -57,7 +57,7 @@ const CheckoutPage = () => {
           <h2 className="text-2xl md:text-3xl font-[Poppins]">
             Card Information
           </h2>
-          <fieldset className="flex items-center justify-between gap-4">
+          <fieldset className="flex items-center justify-between md:flex-row flex-col md:gap-2">
             <InputField
               onChange={handleInputValueChange}
               value={InputFieldValue.fullname}
@@ -73,7 +73,7 @@ const CheckoutPage = () => {
               type="number"
             />
           </fieldset>
-          <fieldset className="flex items-center justify-between gap-4">
+          <fieldset className="flex items-center justify-between md:flex-row flex-col md:gap-2">
             <InputField
               onChange={handleInputValueChange}
               value={InputFieldValue.expiry_date}
