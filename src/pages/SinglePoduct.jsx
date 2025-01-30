@@ -80,6 +80,7 @@ const SingleProduct = () => {
           </div>
 
           <ProductCounter
+            productStocks={product.product_stocks}
             initialCount={productQuantity}
             onChange={handleQuantityChange}
           />
