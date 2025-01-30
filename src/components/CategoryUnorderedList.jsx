@@ -15,7 +15,7 @@ const CategoryUnorderedList = ({
             <li key={item.id}>
               <label className="flex items-center gap-2 text-xm md:text-xm l text-lg font-normal">
                 <input
-                  className="w-4 h-4 md:w-3 md:h-3 accent-sky-700 text-sm font-semibold "
+                  className="w-4 h-4  accent-sky-700 text-sm font-semibold "
                   type={type}
                   value={item[valueKey]}
                   onChange={() => onChange?.(item)}

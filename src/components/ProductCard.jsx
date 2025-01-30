@@ -42,7 +42,7 @@ const ProductCard = ({ data }) => {
                 <ButtonCart
                   quantityCount={1}
                   btnName="Add to Cart"
-                  isDisabled={product.product_stocks <= 5 ? "disabled" : ""}
+                  isDisabled={product.product_stocks <= 0 ? "disabled" : ""}
                   productId={product.id}
                 />
 

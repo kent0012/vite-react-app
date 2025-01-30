@@ -16,13 +16,13 @@ const ButtonCart = ({
     const product = products.find((p) => p.id === productId);
     if (!product) return;
 
-    if (product.product_stocks <= 5) {
+    if (product.product_stocks <= 0) {
       alert("Out of stock");
       return;
     }
 
     const cartItem = cart.find((item) => item.product_id === productId);
-    const currentQuantity = cartItem ? cartItem.quantity : 5;
+    const currentQuantity = cartItem ? cartItem.quantity : 0;
 
     if (currentQuantity + Number(quantityCount) > product.product_stocks) {
       alert("Not enough stock available");

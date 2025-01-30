@@ -22,6 +22,13 @@ const CartProductList = () => {
 
   // Update local and global state for quantity
   const handleUpdateQuantity = (productId, newQuantity) => {
+    const checkQuantity = products.find((product) => product.id === productId);
+
+    if (newQuantity > checkQuantity.product_stocks) {
+      alert("Not enough stock available");
+      return;
+    }
+
     if (newQuantity < 1) return; // Prevent negative or zero quantity
     setQuantities((prev) => ({ ...prev, [productId]: newQuantity }));
     dispatch(updateQuantity({ product_id: productId, quantity: newQuantity }));

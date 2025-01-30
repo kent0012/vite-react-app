@@ -1,23 +1,29 @@
-import Helmet from "react-helmet";
+import React, { useEffect, useState } from "react";
 import UnAuthenticatedLayout from "../layouts/UnAuthenticatedLayout";
+import { Helmet } from "react-helmet";
+import { useNavigate, NavLink } from "react-router-dom";
 import PageBanner from "../components/PageBanner";
-import CartProductList from "../components/CartProductList";
+import ButtonFilled from "../components/ButtonFilled";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, clearCart } from "../feautures/cart/CartSlice";
 import { selectProducts } from "../feautures/products/ProductSlice";
-import { useEffect } from "react";
-import { useState } from "react";
-import ButtonFilled from "../components/ButtonFilled";
-import { NavLink, useNavigate } from "react-router-dom";
-const Cart = () => {
-  const [totalSum, setTotalSum] = useState(0);
+import InputField from "../components/InputField";
 
+const CheckoutPage = () => {
+  const [InputFieldValue, setInputFieldValue] = useState({
+    fullname: "",
+    card_number: "",
+    expiry_date: "",
+    cvv: "",
+  });
+
+  const [totalSum, setTotalSum] = useState(0);
   const cart = useSelector(selectCart);
   const products = useSelector(selectProducts);
 
-  const Navigate = useNavigate();
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
   useEffect(() => {
     const total = cart.reduce((acc, item) => {
@@ -27,40 +33,75 @@ const Cart = () => {
       return acc + product.product_price * item.quantity;
     }, 0);
     setTotalSum(total);
-  });
+  }, [cart, products]);
+
+  const handleInputValueChange = (e) => {
+    setInputFieldValue((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleCheckout = () => {
+    alert("Thank you for shopping with us. Your order has been placed.");
+    dispatch(clearCart());
+
+    Navigate("/shop");
+  };
 
   return (
     <UnAuthenticatedLayout>
       <Helmet>
-        <title>Ecommerce | Cart</title>
+        <title>Checkout</title>
       </Helmet>
-      <PageBanner bannerTitle="Cart" />
-      <section className="max-w-7xl mx-auto py-8 grid grid-cols-1 md:grid-cols-[70%_1fr] gap-4 p-4 ">
-        <div className="mb-5 shadow p-4 rounded-lg bg-white">
-          <div className="mb-5 rounded-lg bg-white flex items-center justify-between">
-            <h2 className="text-2xl md:text-3xl font-[Poppins]">Cart List</h2>
-            {/* <button
-              onClick={() => dispatch(clearCart())}
-              className={`bg-red-800 border border-solid border-red-8 duration-500 font-[Poppins] py-2 px-4 text-white rounded hover:bg-red-700  ${
-                cart.length === 0
-                  ? "opacity-50 cursor-not-allowed"
-                  : "cursor-pointer"
-              }`}
-            >
-              Clear Cart
-            </button> */}
-            <ButtonFilled
-              isDisabled={cart.length === 0}
-              btnName="Clear Cart"
-              onClick={() => dispatch(clearCart())}
-              bgColor="bg-red-800"
-              hoverBgColor="hover:bg-red-700"
-              borderColor="border-red-800"
+      <PageBanner bannerTitle="Checkout" />
+      <section className="max-w-5xl mx-auto py-8 grid grid-cols-1 md:grid-cols-[65%_1fr] gap-4 p-4 ">
+        <div className="shadow p-4 rounded-lg bg-white">
+          <h2 className="text-2xl md:text-3xl font-[Poppins]">
+            Card Information
+          </h2>
+          <fieldset className="flex items-center justify-between gap-4">
+            <InputField
+              onChange={handleInputValueChange}
+              value={InputFieldValue.fullname}
+              id="fullname"
+              label="Fullname (as displayed on card)"
+              type="text"
             />
-          </div>
-          <div className="flex items-center justify-between flex-col gap-5 w-full rounded-lg bg-white">
-            <CartProductList />
-          </div>
+            <InputField
+              onChange={handleInputValueChange}
+              value={InputFieldValue.card_number}
+              id="card_number"
+              label="Card Number"
+              type="number"
+            />
+          </fieldset>
+          <fieldset className="flex items-center justify-between gap-4">
+            <InputField
+              onChange={handleInputValueChange}
+              value={InputFieldValue.expiry_date}
+              id="expiry_date"
+              label="Expiry Date"
+              type="date"
+            />
+            <InputField
+              onChange={handleInputValueChange}
+              value={InputFieldValue.cvv}
+              id="cvv"
+              label="CVV"
+              type="password"
+            />
+          </fieldset>
+
+          <ButtonFilled
+            isDisabled={
+              !InputFieldValue.fullname ||
+              !InputFieldValue.card_number ||
+              !InputFieldValue.expiry_date ||
+              !InputFieldValue.cvv ||
+              cart.length === 0
+            }
+            onClick={handleCheckout}
+            className="w-full mt-5"
+            btnName="Pay Now"
+          />
         </div>
         <div className="mb-5 shadow p-4 rounded-lg bg-white">
           <h2 className="text-2xl md:text-3xl font-[Poppins]">Summary</h2>
@@ -104,13 +145,7 @@ const Cart = () => {
               </p>
             </div>
             <hr className="w-full border-t-1 border-gray-300 my-5" />
-            <div className="flex items-center justify-between w-full">
-              <ButtonFilled
-                isDisabled={cart.length === 0}
-                btnName="Checkout"
-                type="button"
-                onClick={() => Navigate("/checkout")}
-              />
+            <div className="flex items-center justify-end w-full">
               <NavLink
                 className="text-xm text-gray-500 hover:underline duration-500"
                 to="/shop"
@@ -125,4 +160,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CheckoutPage;

@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import SinglePoduct from "./pages/SinglePoduct";
 import Cart from "./pages/Cart";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const root = document.getElementById("root");
 
@@ -21,6 +22,7 @@ ReactDOM.createRoot(root).render(
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<SinglePoduct />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </Provider>
   </BrowserRouter>

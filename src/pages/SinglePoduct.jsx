@@ -70,10 +70,10 @@ const SingleProduct = () => {
             </p>
             <p
               className={`text-sm ${
-                product?.product_stocks > 5 ? "text-green-600" : "text-red-600"
+                product?.product_stocks > 0 ? "text-green-600" : "text-red-600"
               }`}
             >
-              {product?.product_stocks > 5
+              {product?.product_stocks > 0
                 ? `In Stock: ${product?.product_stocks}`
                 : "Out of Stock"}
             </p>
@@ -95,7 +95,7 @@ const SingleProduct = () => {
               className="text-xm text-gray-500 hover:underline duration-500"
               to="/shop"
             >
-              Continue Shopping
+              Shop More
             </NavLink>
           </div>
         </div>
