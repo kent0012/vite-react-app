@@ -1,4 +1,12 @@
-const InputField = ({ id, label, type = "text", className = "", ...props }) => {
+const InputField = ({
+  id,
+  label,
+  type = "text",
+  pattern,
+  className = "",
+  max,
+  ...props
+}) => {
   return (
     <div
       className={`flex items-center my-4 justify-between flex-col gap-5 w-full rounded-lg bg-white ${className}`}
@@ -9,6 +17,12 @@ const InputField = ({ id, label, type = "text", className = "", ...props }) => {
           id={id}
           className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
+          pattern={pattern === true ? "^[0-9]*$" : pattern || ""}
+          onInput={(e) => {
+            if (pattern === true) {
+              e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+            }
+          }}
           {...props}
         />
         <label

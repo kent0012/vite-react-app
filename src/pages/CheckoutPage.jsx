@@ -87,6 +87,8 @@ const CheckoutPage = () => {
               id="cvv"
               label="CVV"
               type="password"
+              max={3}
+              pattern={true}
             />
           </fieldset>
 
