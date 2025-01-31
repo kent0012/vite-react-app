@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 import ButtonCart from "./ButtonCart";
 import ProductRatings from "./ProductRatings";
+import Loader from "./Loader";
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, isLoading }) => {
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       {data.length === 0 ? (

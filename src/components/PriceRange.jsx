@@ -1,9 +1,15 @@
-const PriceRange = ({ priceRange, onPriceChange, maxPrice }) => {
+import Loader from "./Loader";
+
+const PriceRange = ({ priceRange, onPriceChange, maxPrice, isLoading }) => {
   // Handle range input change
   const handlePriceChange = (e) => {
     const newPrice = parseInt(e.target.value, 10);
     onPriceChange(newPrice);
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="w-full">

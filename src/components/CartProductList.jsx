@@ -50,7 +50,7 @@ const CartProductList = () => {
             className="flex items-center justify-between p-3 shadow rounded-lg bg-white w-full hover:shadow-md duration-500"
           >
             <div className="flex items-center space-x-4">
-              <figure className="w-20 h-20 md:w-24 md:h-24 shadow ratio-1:1">
+              <figure className="w-20 h-20 md:w-24 md:h-24 shadow ratio-1:1 hidden md:block">
                 <picture>
                   <img
                     className="w-full h-full object-cover"
@@ -111,7 +111,7 @@ const CartProductList = () => {
 
               <button
                 onClick={() => dispatch(removeFromCart(product.id))}
-                className="text-red-800 hover:text-red-700 duration-500"
+                className="text-red-800 hover:text-red-700 duration-500 cursor-pointer text-lg"
               >
                 <i className="fa-solid fa-trash"></i>
               </button>

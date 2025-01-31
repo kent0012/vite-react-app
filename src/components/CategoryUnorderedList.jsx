@@ -1,10 +1,16 @@
+import Loader from "./Loader";
+
 const CategoryUnorderedList = ({
   data,
   type = "",
   onChange,
   valueKey = "",
   labelKey = "",
+  isLoading,
 }) => {
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       {data.length === 0 ? (
