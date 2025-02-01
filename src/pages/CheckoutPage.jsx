@@ -8,7 +8,8 @@ import ButtonFilled from "../components/ButtonFilled";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, clearCart } from "../feautures/cart/CartSlice";
 import { selectProducts } from "../feautures/products/ProductSlice";
-import InputField from "../components/InputField";
+import CartSummary from "../components/CartSummary";
+import CardInformation from "../components/CardInformation";
 
 const CheckoutPage = () => {
   const [InputFieldValue, setInputFieldValue] = useState({
@@ -57,40 +58,31 @@ const CheckoutPage = () => {
           <h2 className="text-2xl md:text-3xl font-[Poppins]">
             Card Information
           </h2>
-          <fieldset className="flex items-center justify-between md:flex-row flex-col md:gap-2">
-            <InputField
-              onChange={handleInputValueChange}
-              value={InputFieldValue.fullname}
-              id="fullname"
-              label="Fullname (as displayed on card)"
-              type="text"
-            />
-            <InputField
-              onChange={handleInputValueChange}
-              value={InputFieldValue.card_number}
-              id="card_number"
-              label="Card Number"
-              type="number"
-            />
-          </fieldset>
-          <fieldset className="flex items-center justify-between md:flex-row flex-col md:gap-2">
-            <InputField
-              onChange={handleInputValueChange}
-              value={InputFieldValue.expiry_date}
-              id="expiry_date"
-              label="Expiry Date"
-              type="date"
-            />
-            <InputField
-              onChange={handleInputValueChange}
-              value={InputFieldValue.cvv}
-              id="cvv"
-              label="CVV"
-              type="password"
-              max={3}
-              pattern={true}
-            />
-          </fieldset>
+          <CardInformation
+            handleInputValueChange={handleInputValueChange}
+            InputFieldValue={InputFieldValue}
+            fields={[
+              {
+                id: "fullname",
+                label: "Fullname (as displayed on card)",
+                type: "text",
+              },
+              { id: "card_number", label: "Card Number", type: "number" },
+            ]}
+          />
+
+          <CardInformation
+            handleInputValueChange={handleInputValueChange}
+            InputFieldValue={InputFieldValue}
+            fields={[
+              {
+                id: "expiry_date",
+                label: "Expiry Date)",
+                type: "date",
+              },
+              { id: "cvv", label: "CVV", type: "password", pattern: true },
+            ]}
+          />
 
           <ButtonFilled
             isDisabled={
@@ -109,43 +101,11 @@ const CheckoutPage = () => {
           <h2 className="text-2xl md:text-3xl font-[Poppins]">Summary</h2>
 
           <div className="flex items-center justify-between flex-col gap-2 w-full mt-5 rounded-lg bg-white">
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Total Amount:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(totalSum)}
-              </p>
-            </div>
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Delivery Fee:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(0)}
-              </p>
-            </div>
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Total Tax:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(0)}
-              </p>
-            </div>
+            <CartSummary totalSum={totalSum} label="Total Amount:" />
+            <CartSummary totalSum={0} label="Delivery Fee:" />
+            <CartSummary totalSum={0} label="Total Tax:" />
             <hr className="w-full border-t-1 border-gray-300 my-5" />
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Total:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(totalSum)}
-              </p>
-            </div>
+            <CartSummary totalSum={totalSum} label="Total:" />
             <hr className="w-full border-t-1 border-gray-300 my-5" />
             <div className="flex items-center justify-end w-full">
               <NavLink

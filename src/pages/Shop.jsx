@@ -99,9 +99,8 @@ const Shop = () => {
           <hr className="w-full border-t-1 border-gray-300 my-5" />
         </div>
         <div className="p-4 shadow rounded-md bg-white">
-          <div className="flex items-center justify-between gap-2 mb-5">
-            <h2 className="text-2xl md:text-3xl font-[Poppins] ">Products</h2>
-            <div className="shadow-lg rounded-md bg-white p-2 flex items-center gap-2 justify-between w-1/2">
+          <div className="flex items-start flex-col md:flex-row justify-between gap-2 mb-5">
+            <div className="shadow-lg rounded-md bg-white p-2 flex items-center gap-2 justify-between md:w-1/2 w-full">
               <input
                 className="outline-0 w-full"
                 type="search"
@@ -110,6 +109,9 @@ const Shop = () => {
               />
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
+            <h2 className="text-2xl md:text-3xl font-[Poppins] md:mt-0 mt-5">
+              Products
+            </h2>
           </div>
           <ProductCard isLoading={isLoading} data={filterProducts} />
         </div>

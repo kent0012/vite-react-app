@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ButtonFilled from "../components/ButtonFilled";
 import { NavLink, useNavigate } from "react-router-dom";
+import CartSummary from "../components/CartSummary";
 const Cart = () => {
   const [totalSum, setTotalSum] = useState(0);
 
@@ -39,16 +40,7 @@ const Cart = () => {
         <div className="mb-5 shadow p-4 rounded-lg bg-white">
           <div className="mb-5 rounded-lg bg-white flex items-center justify-between">
             <h2 className="text-2xl md:text-3xl font-[Poppins]">Cart List</h2>
-            {/* <button
-              onClick={() => dispatch(clearCart())}
-              className={`bg-red-800 border border-solid border-red-8 duration-500 font-[Poppins] py-2 px-4 text-white rounded hover:bg-red-700  ${
-                cart.length === 0
-                  ? "opacity-50 cursor-not-allowed"
-                  : "cursor-pointer"
-              }`}
-            >
-              Clear Cart
-            </button> */}
+
             <ButtonFilled
               isDisabled={cart.length === 0}
               btnName="Clear Cart"
@@ -64,45 +56,12 @@ const Cart = () => {
         </div>
         <div className="mb-5 shadow p-4 rounded-lg bg-white">
           <h2 className="text-2xl md:text-3xl font-[Poppins]">Summary</h2>
-
           <div className="flex items-center justify-between flex-col gap-2 w-full mt-5 rounded-lg bg-white">
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Total Amount:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(totalSum)}
-              </p>
-            </div>
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Delivery Fee:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(0)}
-              </p>
-            </div>
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Total Tax:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(0)}
-              </p>
-            </div>
+            <CartSummary totalSum={totalSum} label="Total Amount:" />
+            <CartSummary totalSum={0} label="Delivery Fee:" />
+            <CartSummary totalSum={0} label="Total Tax:" />
             <hr className="w-full border-t-1 border-gray-300 my-5" />
-            <div className="flex items-center justify-between w-full">
-              <h3 className="text-lg">Total:</h3>
-              <p className="text-lg text-gray-500">
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(totalSum)}
-              </p>
-            </div>
+            <CartSummary totalSum={totalSum} label="Total Sum:" />
             <hr className="w-full border-t-1 border-gray-300 my-5" />
             <div className="flex items-center justify-between w-full">
               <ButtonFilled
