@@ -89,7 +89,7 @@ const SingleProduct = () => {
             <ButtonCart
               quantityCount={productQuantity}
               btnName="Add to Cart"
-              isDisabled={product.product_stocks <= 5 ? "disabled" : ""}
+              isDisabled={product.product_stocks <= 0 ? "disabled" : ""}
               productId={product.id}
             />
             <NavLink
