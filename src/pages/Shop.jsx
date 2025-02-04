@@ -15,6 +15,7 @@ const Shop = () => {
 
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchProduct, setSearchProduct] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const [priceRange, setPriceRange] = useState(0);
 
   const categories = useSelector(selectCategories);
@@ -30,9 +31,17 @@ const Shop = () => {
     });
   };
 
-  const handleSearchProduct = (e) => {
-    setSearchProduct(e.target.value);
+  const handleSearchInput = (e) => {
+    setSearchInput(e.target.value);
   };
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      setSearchProduct(searchInput);
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchInput]);
 
   useEffect(() => {
     if (products.length > 0) {
@@ -105,7 +114,8 @@ const Shop = () => {
                 className="outline-0 w-full"
                 type="search"
                 placeholder="Search..."
-                onChange={handleSearchProduct}
+                value={searchInput}
+                onChange={handleSearchInput}
               />
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
